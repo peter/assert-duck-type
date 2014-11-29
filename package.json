@@ -1,0 +1,29 @@
+{
+  "name": "assert-duck-type",
+  "version": "0.0.1",
+  "description": "Runtime type assertions for function arguments in Node.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peter/assert-duck-type"
+  },
+  "keywords": [
+    "assert",
+    "types"
+  ],
+  "author": "Peter Marklund",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peter/assert-duck-type/issues"
+  },
+  "homepage": "https://github.com/peter/assert-duck-type",
+  "devDependencies": {
+    "lodash": "^2.4.1"
+  }
+}
