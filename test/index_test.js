@@ -78,30 +78,30 @@ describe('assert-duck-type', function() {
     });
 
     it('works with object types', function() {
-      assert.equal(duckType({foo: 'string'}, {foo: 'bar'}), true)
-      assert.equal(duckType({foo: 'string'}, {foo: 'bar', baz: 1}), true)
-      assert.equal(duckType({foo: 'string'}, {foo: null}), false)
-      assert.equal(duckType({foo: 'string'}, {}), false)
+      assert.equal(duckType({foo: 'string'}, {foo: 'bar'}), true);
+      assert.equal(duckType({foo: 'string'}, {foo: 'bar', baz: 1}), true);
+      assert.equal(duckType({foo: 'string'}, {foo: null}), false);
+      assert.equal(duckType({foo: 'string'}, {}), false);
 
-      assert.equal(duckType({foo: {bar: 'boolean'}}, {foo: {bar: true}}), true)
-      assert.equal(duckType({foo: {bar: 'array'}}, {foo: {bar: []}}), true)
-      assert.equal(duckType({foo: {bar: {baz: 'array'}}}, {foo: {bar: {baz: {}}}}), false)
+      assert.equal(duckType({foo: {bar: 'boolean'}}, {foo: {bar: true}}), true);
+      assert.equal(duckType({foo: {bar: 'array'}}, {foo: {bar: []}}), true);
+      assert.equal(duckType({foo: {bar: {baz: 'array'}}}, {foo: {bar: {baz: {}}}}), false);
 
-      assert.equal(duckType({foo: 'string'}, {foo: 5}), false)
-      assert.equal(duckType({foo: 'string'}, {bar: 'bar'}), false)
-      assert.equal(duckType({foo: 'string'}, {}), false)
-      assert.equal(duckType({foo: 'string'}, ['bar']), false)
+      assert.equal(duckType({foo: 'string'}, {foo: 5}), false);
+      assert.equal(duckType({foo: 'string'}, {bar: 'bar'}), false);
+      assert.equal(duckType({foo: 'string'}, {}), false);
+      assert.equal(duckType({foo: 'string'}, ['bar']), false);
     });
 
     it('works with array types', function() {
-      assert.equal(duckType([{foo: 'string'}], [{foo: '5'}]), true)
-      assert.equal(duckType([{foo: 'string'}], [{foo: 5}]), false)
-      assert.equal(duckType([{foo: 'string'}], [{}]), false)
-      assert.equal(duckType([{foo: 'string'}], undefined), false)
-      assert.equal(duckType([{foo: 'string'}], null), false)
-      assert.equal(duckType([{foo: 'string'}], []), true)
-      assert.equal(duckType([{foo: 'string'}], ['bar']), false)
-      assert.equal(duckType([{foo: 'string'}], {foo: 'bar'}), false)
+      assert.equal(duckType([{foo: 'string'}], [{foo: '5'}]), true);
+      assert.equal(duckType([{foo: 'string'}], [{foo: 5}]), false);
+      assert.equal(duckType([{foo: 'string'}], [{}]), false);
+      assert.equal(duckType([{foo: 'string'}], undefined), false);
+      assert.equal(duckType([{foo: 'string'}], null), false);
+      assert.equal(duckType([{foo: 'string'}], []), true);
+      assert.equal(duckType([{foo: 'string'}], ['bar']), false);
+      assert.equal(duckType([{foo: 'string'}], {foo: 'bar'}), false);
 
       assert.equal(duckType(['string'], ['foo']), true);
       assert.equal(duckType(['string'], [null]), false);
@@ -109,11 +109,16 @@ describe('assert-duck-type', function() {
 
       assert.equal(duckType(['string'], []), true);
 
-      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: true}]}]), true)
-      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: true, baz: 1}]}]), true)
-      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: false}]}]), true)
-      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: 'true'}]}]), false)
-      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bars: true}]}]), false)
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: true}]}]), true);
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: true, baz: 1}]}]), true);
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: false}]}]), true);
+
+      // Handle null and undefined in arrays
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: false}]}, null]), false);
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: false}]}, undefined]), false);
+
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bar: 'true'}]}]), false);
+      assert.equal(duckType([{foo: [{bar: 'boolean'}]}], [{foo: [{bars: true}]}]), false);
     });
   });
 

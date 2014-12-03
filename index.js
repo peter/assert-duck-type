@@ -1,5 +1,7 @@
 'use strict';
 
+var toString = Object.prototype.toString;
+
 var typeOf = function(value) {
   var type = typeof value;
   if (type === 'object') {
@@ -36,8 +38,8 @@ var duckType = function(type, value) {
   } else if (typeOf(type) === 'array') {
     if (typeOf(value) === 'array') {
       if (value.length === 0) return true;
-      for (var i = 0; i < type.length; ++i) {
-        if (!duckType(type[i], (value && value[i]))) {
+      for (var i = 0; i < value.length; ++i) {
+        if (!duckType(type[0], (value && value[i]))) {
           return false;
         }
       }

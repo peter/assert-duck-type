@@ -1,0 +1,14 @@
+{
+  "eqnull": true,
+  "globalstrict": true,
+	"globals":	{
+		"process":	false,
+		"module":	false,
+		"require":	false,
+		"it":				false,
+		"before":			false,
+		"beforeEach":		false,
+		"describe":			false,
+    "console": false
+	}
+}
