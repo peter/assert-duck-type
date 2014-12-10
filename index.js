@@ -1,6 +1,7 @@
 'use strict';
 
-var toString = Object.prototype.toString;
+var inspect = require('util').inspect,
+    toString = Object.prototype.toString;
 
 var typeOf = function(value) {
   var type = typeof value;
@@ -62,7 +63,7 @@ var checkTypes = function(args, types) {
     }
   }
   if (invalidTypes.length > 0) {
-    var message = "Invalid types: " + JSON.stringify(invalidTypes);
+    var message = "Invalid types: " + inspect(invalidTypes);
     var err = new Error(message);
     err.invalidTypes = invalidTypes;
     return err;
