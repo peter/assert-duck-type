@@ -24,10 +24,14 @@ var typeOf = function(value) {
 var duckType = function(type, value) {
   if (typeOf(type) === 'string') {
     if (type.indexOf('?') === (type.length-1)) {
-      return typeOf(value) === type.substring(0, type.length-1) || value === null || value === undefined;
-    } else {
-      return typeOf(value) === type;
+      if (value === null || value === undefined) return true;
+      type = type.substring(0, type.length-1);
     }
+    var validTypes = type.split('|');
+    for (var i = 0; i < validTypes.length; ++i) {
+      if (typeOf(value) === validTypes[i]) return true;
+    }
+    return false;
   } else if (typeOf(type) === 'object') {
     var keys = Object.keys(type);
     for (var i = 0; i < keys.length; ++i) {

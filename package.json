@@ -1,6 +1,6 @@
 {
   "name": "assert-duck-type",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Runtime type assertions for function arguments in Node.js",
   "main": "index.js",
   "directories": {

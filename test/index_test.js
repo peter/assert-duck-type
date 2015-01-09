@@ -77,6 +77,28 @@ describe('assert-duck-type', function() {
       assert.equal(duckType('boolean?', 'true'), false);
     });
 
+    it('works with strings containing multiple types separated by pipe', function() {
+      assert.equal(duckType('string|number', 'foobar'), true);
+      assert.equal(duckType('string|number', 5), true);
+      assert.equal(duckType('string|number', true), false);
+      assert.equal(duckType('string|number', true), false);
+      assert.equal(duckType('string|number', null), false);
+      assert.equal(duckType('string|number', undefined), false);
+
+      assert.equal(duckType('string|number?', 'foobar'), true);
+      assert.equal(duckType('string|number?', 5), true);
+      assert.equal(duckType('string|number?', true), false);
+      assert.equal(duckType('string|number?', true), false);
+      assert.equal(duckType('string|number?', null), true);
+      assert.equal(duckType('string|number?', undefined), true);
+
+      assert.equal(duckType('string|number|boolean', 'false'), true);
+      assert.equal(duckType('string|number|boolean', 3.2), true);
+      assert.equal(duckType('string|number|boolean', true), true);
+      assert.equal(duckType('string|number|boolean', []), false);
+      assert.equal(duckType('string|number|boolean', {}), false);
+    });
+
     it('works with object types', function() {
       assert.equal(duckType({foo: 'string'}, {foo: 'bar'}), true);
       assert.equal(duckType({foo: 'string'}, {foo: 'bar', baz: 1}), true);
